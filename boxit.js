@@ -31,4 +31,15 @@ function drawMiddleBorder (num){
     return lines;
 }
 
-console.log(drawMiddleBorder(4))
+console.log(drawBottomBorder(4))
+
+function drawBottomBorder (num){
+    let lines = ""
+    for(let i =0; i<num; i++){
+        lines += "━";
+    }
+    lines ="┗" + lines + "┛"
+    return lines;
+}
+
+console.log(drawBottomBorder(4))
