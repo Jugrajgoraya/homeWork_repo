@@ -43,3 +43,9 @@ function drawBottomBorder (num){
 }
 
 console.log(drawBottomBorder(4))
+
+function drawBarsArround (str){
+    return "┃" + str + "┃";
+}
+
+console.log(drawBarsArround("my name is rohit"));
