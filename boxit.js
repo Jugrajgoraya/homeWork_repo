@@ -9,3 +9,16 @@ function drawLine (num){
 }
 
 console.log(drawLine(4))
+
+function drawTopborder (num){
+    let lines = ""
+    for(let i =0; i<num; i++){
+        lines += "━";
+    }
+    lines = "┏" + lines +"┓"
+    return lines;
+}
+
+console.log(drawTopborder(4))
+
+
