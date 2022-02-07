@@ -82,36 +82,3 @@ function boxIt(arr =[]) {
 console.log(boxIt(["kon hai","my name is rohit","tu kon hai"]));
 console.log(boxIt(['a']));
 console.log(boxIt());
-
-
-
-// forword(step){
-//     if ((this.angle = 0) || (this.angle = 360)){
-//         this.path.push([step,0])
-//     } else if ((this.angle = 90) || (this.angle = -270)) {
-//         this.path.push([0, step])
-//     } else if ((this.angle = 180) || (this.angle = -180)) {
-//         this.path.push([-step,0])
-//     } else if ((this.angle = -90) || (this.angle = 270)) {
-//         this.path.push([0,-step])
-//     }
-// }
-// right(){
-//     this.angle -=90;
-// }
-// left(){
-//     this.angle +=90;
-// }
-// allPoints(){
-//     let str=""
-//     for(let i=0; i < this.path.length; i++){
-//         let temp =""
-//         for(let j = 0; j< this.path[i].length; j++){
-//             console.log(this.path[i][j])
-//             temp += ' '
-//         }
-//         str += temp+ '\n'
-        
-//     }
-
-// }
