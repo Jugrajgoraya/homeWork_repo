@@ -15,7 +15,13 @@ class Turtle{
             this.path.push((0,-step))
         }
     }
+    right(){
+        this.angle -=90;
+    }
     
+    left(){
+        this.angle +=90;
+    }
 
 }
 
