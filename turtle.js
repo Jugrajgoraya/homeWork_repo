@@ -63,9 +63,9 @@ class Turtle{
             let row = ''
             for(let X=0; X<=this.limit[0]; X++){
                 if(turleMoves(X,Y)){
-                    row +='*'
+                    row +='* '
                 }else{
-                    row +='-'
+                    row +='- '
                 }
             }
             patt +=row +'\n'
@@ -74,7 +74,7 @@ class Turtle{
     }
 }
 
-const flash = new Turtle(15, 15).forward(5).left().forward(6).right().forward(3).right().forward(10).left().forward(3).left().forward(5)
+const flash = new Turtle(15, 15).forward(4).right().forward(3).left().forward(6).left().forward(7).right().forward(3)
 flash.allPoints()
 flash.print()
 
