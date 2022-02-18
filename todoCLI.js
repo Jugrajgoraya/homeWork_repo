@@ -9,7 +9,7 @@ const due = '[]'
 
 function view(){
     if(list.length == 0){
-        console.log("List is empty..." + '\n');
+        console.log("List is empty...");
         return optionList
     }else{
         let temp =''
@@ -25,18 +25,22 @@ function add (item){
     return optionList
 }
 function remove(index){
-    if(list[index].includes(`${due}`)){
-        console.log(`deleted "${list[index].replace(`${due} `,'')}"`);
-    }else if(list[index].includes(`${done}`)){
-        console.log(`deleted "${list[index].replace(`${done} `,'')}"`);
+    if(index <= list.length-1){
+        if(list[index].includes(`${due}`)){
+            console.log(`deleted "${list[index].replace(`${due} `,'')}"`);
+        }else if(list[index].includes(`${done}`)){
+            console.log(`deleted "${list[index].replace(`${done} `,'')}"`);
+        }
+        list.splice(index,1)
+    }else{
+        console.log("doesn't have any item at this index..");
     }
-    list.splice(index,1)
     return optionList
 }
 
 function finish(i){
     list = list.map((item,index) =>{ 
-        if(index == i){
+        if((index == i) && item.includes(`${due}`)){
             console.log(`completed "${item.replace(`${due} `,'')}"`);
             return item = item.replace(`${due}`,`${done}`)
         }else{
@@ -51,20 +55,28 @@ function quit(){
 
 const rl = readline.createInterface({
     input: process.stdin,
-    output: process.output
-})
+    output: process.stdout,
+    prompt: "> ",
+  });
+
+console.log('Welcome to Todo CLI!\n-------------------- ');
+rl.prompt()
 
 rl.on(`line`,(answer)=>{
     if (answer == 'v'){
         console.log(view());
-    }else if(answer == 'n'){
-        rl.question('what ? ',(ans)=>{
+        rl.prompt();
+    }else if(answer === 'n'){
+        rl.question('what ? \n> ',(ans) =>{
             console.log(add(ans))
+            rl.prompt()
         })
     }else if( answer[0] == 'c'){
         console.log(finish(parseInt(answer[1])))
+        rl.prompt()
     }else if(answer[0] == 'd'){
         console.log(remove(parseInt(answer[1])));
+        rl.prompt()
     }else if( answer == 'q'){
         quit()
         rl.close()
