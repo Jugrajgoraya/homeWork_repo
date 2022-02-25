@@ -1,0 +1,19 @@
+<%- include('partials/header.ejs')  %> 
+    <form action="/cohorts" method="POST" class="mt-3 mb-3">
+        <div class="mb-3">
+            <label for="logoUrl" class="form-label">Logo Url</label>
+            <input type="text" name="logoUrl" class="form-control" id="logoUrl" placeholder="e.g. http//www.example.com" >
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" name="name" class="form-control" id="name" placeholder="Flying Funks" >
+        </div>
+        <div class="mb-3">
+            <label for="members" class="form-label">Members</label>
+            <textarea class="form-control" name="members" id="members" rows="3" placeholder="john,Ravi,Yuvi,Rahul"></textarea>
+        </div> 
+        <div class="d-grid justify-content-md-end" >
+            <input type="submit" class="btn btn-outline-primary mb-3" value="Create Cohort">
+        </div>        
+    </form>
+<%- include('partials/footer.ejs')  %>   
