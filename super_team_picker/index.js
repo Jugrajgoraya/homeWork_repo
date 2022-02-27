@@ -22,11 +22,45 @@ app.get("/cohorts",(req,res)=>{
 })
 
 app.get("/cohorts/new",(req,res)=>{
-    res.render('new_cohort')
+    res.render('new_cohort',{cohort: undefined})
 })
+
+app.get('/cohorts/:id/edit', (req, res) => {
+    knex('cohorts')
+    .where('id', req.params.id)
+    .first()
+    .then(cohort => {
+        res.render('new_cohort', {cohort: cohort})
+    })
+})
+app.post('/cohorts/update/:id', (req, res) => {
+    console.log(req.body.name);
+    knex('cohorts')
+    .where('id', req.params.id)
+    .update({
+        name: req.body.name,
+        logoUrl: req.body.logoUrl,
+        members: req.body.members
+    })
+    .then(() => {
+        console.log(req.body.name);
+        res.redirect(`/cohorts/${req.params.id}`)
+    })
+})
+
+app.post('/cohorts/:id', (req, res) => {
+    console.log();
+    knex('cohorts')
+    .where('id', req.params.id)
+    .del()
+    .then(() => {
+        console.log(req.body.name);
+        res.redirect('/cohorts')
+    })
+}) 
+
 app.get("/cohorts/:id",(req,res)=>{
 
-    console.log('inside the show page');
     knex('cohorts').where('id',req.params.id)
     .first() // doesn't actually need but just to show that we can
     .then(cohort=>{
@@ -34,9 +68,7 @@ app.get("/cohorts/:id",(req,res)=>{
             res.send('no cohort found')
         }else{
             if(req.query.input){
-                console.log(req.query);
                 let count = parseInt(req.query.quantity)
-                console.log(count);
                 let result = []
                 let arr = cohort.members.split(',')
                 if(req.query.input == "numberPerCount"){
@@ -55,7 +87,6 @@ app.get("/cohorts/:id",(req,res)=>{
                         result.push(arr.slice(i, i + chunk).join(','))
                     }      
                 }
-                console.log(result);
                 res.render('show_cohort',{cohort: cohort, result: result})
             }else{
                 res.render('show_cohort',{cohort: cohort, result: undefined}) 
@@ -63,6 +94,7 @@ app.get("/cohorts/:id",(req,res)=>{
         }
     })
 })
+
 app.post("/cohorts",(req,res)=>{
     knex('cohorts').insert({
         name: req.body.name,
@@ -72,7 +104,6 @@ app.post("/cohorts",(req,res)=>{
     .returning('*')
     .then(cohorts=>{
         last_cohort = cohorts[0]
-        console.log(last_cohort);
         res.redirect(`/cohorts/${last_cohort.id}`)
     })
 })
