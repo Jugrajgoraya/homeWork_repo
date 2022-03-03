@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const knex = require('./db/client')
+const methodOverride = require('method-override')
 
 const logger = require('morgan')
 app.use(logger('dev'))
@@ -11,7 +12,15 @@ app.use(express.static(path.join(__dirname,'public')))
 app.set('view engine', 'ejs')
 app.set('views', 'views')
 
+
 app.use(express.urlencoded({extended: true})) // urlParser req.body
+
+app.use(methodOverride((req, res) => {
+    if (req.body && req.body._method){
+        const method = req.body._method;
+        return method
+    }
+}))
 
 app.get("/cohorts",(req,res)=>{
     knex('cohorts')
@@ -33,7 +42,7 @@ app.get('/cohorts/:id/edit', (req, res) => {
         res.render('new_cohort', {cohort: cohort})
     })
 })
-app.post('/cohorts/update/:id', (req, res) => {
+app.patch('/cohorts/:id', (req, res) => {
     console.log(req.body.name);
     knex('cohorts')
     .where('id', req.params.id)
@@ -48,7 +57,7 @@ app.post('/cohorts/update/:id', (req, res) => {
     })
 })
 
-app.post('/cohorts/:id', (req, res) => {
+app.delete('/cohorts/:id', (req, res) => {
     console.log();
     knex('cohorts')
     .where('id', req.params.id)
