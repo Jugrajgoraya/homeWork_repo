@@ -47,15 +47,28 @@ keyBoard.addEventListener('click', (event)=>{
     console.log(attempts);
     console.log(found);
     if(found.length == word.length){
-        const keySound = new Audio('sounds/loose.wav')
-        keySound.play(); 
-        alert('yeahhhh you won!!')
-        window.location.reload();
+        const keySound = ()=> new Audio(`sounds/win.wav`)
+        setTimeout(() => {
+            keySound().play()
+        }, 0)
+        setTimeout(() => {
+            alert('yeahhhh you won!!'
+        )},100);
+        setTimeout(()=>{
+            window.location.reload();
+        },200)
     }
     if(attempts == 6){
-        const keySound = new Audio('sounds/loose.wav')
-        keySound.play();
-        alert('you are hanged !! Better luck next time')
-        window.location.reload();
+        console.log("hello_world");
+        const keySound = ()=> new Audio(`sounds/loose.wav`)
+        setTimeout(() => {
+            keySound().play()
+        }, 0)
+        setTimeout(() => {
+            alert('You are hanged !! Better luck next time'
+        )},100);
+        setTimeout(()=>{
+            window.location.reload();
+        },200)
     }
 })
